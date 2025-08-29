@@ -1,6 +1,26 @@
 <resources>
-    <string name="app_name">10_coding_languages</string>
+    <string name="app_name">10 coding languages</string>
     <string name="js_label">js</string>
     <string name="js_title">javascript: web language</string>
-    <string name="js_description">javascript is a..</string>
+    <string name="js_description">JavaScript is a programming language and core technology of the web platform
+        , alongside HTML and CSS.
+    </string>
+
+    <string name="kt_label">kt</string>
+    <string name="kt_title">kotlin: mobile language</string>
+    <string name="kt_description">Kotlin is a modern, statically typed programming language known for its conciseness, null safety, and full Java interoperation. Developed by JetBrains and
+        officially preferred for Android development.
+    </string>
+
+    <string name="java_label">java</string>
+    <string name="java_title">java: great language</string>
+    <string name="java_description">Java is a set of computer software and specifications that provides a software platform for developing application
+        software and deploying it in a cross-platform computing environment.
+    </string>
+
+    <string name="c_label">c</string>
+    <string name="c_title">c: base language</string>
+    <string name="c_description">C is a general-purpose programming language.
+        It was created in the 1970s by Dennis Ritchie and remains widely used and influential.
+    </string>
 </resources>

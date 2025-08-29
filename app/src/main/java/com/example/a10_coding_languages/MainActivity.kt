@@ -23,9 +23,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -44,6 +47,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,10 +68,9 @@ fun MainApp(modifier: Modifier = Modifier) {
     val languages: List<Language> = LanguageList().loadList()
     Scaffold(
         modifier = modifier,
-        topBar = {}
+        topBar = {TopBar()}
     ) { paddingValues ->
         LazyColumn(contentPadding = paddingValues) {
-            repeat(10) {
                 items(languages) {
                     CardLanguage(
                         it, Modifier
@@ -73,9 +78,24 @@ fun MainApp(modifier: Modifier = Modifier) {
                             .fillMaxWidth(0.9f)
                     )
                 }
-            }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBar(){
+    CenterAlignedTopAppBar(
+        modifier = Modifier.fillMaxWidth(),
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.tertiary,
+            titleContentColor = MaterialTheme.colorScheme.onTertiary
+        ),
+        title = {Text(
+            text = stringResource(R.string.app_name),
+            style = MaterialTheme.typography.headlineSmall
+        )}
+    )
 }
 
 @Composable
@@ -93,14 +113,14 @@ fun CardLanguage(language: Language, modifier: Modifier = Modifier) {
                 .clip(RoundedCornerShape(bottomStart = 30.dp, topEnd = 30.dp))
         ) {
             Column {
-                LanguageTitles(Modifier.padding(8.dp))
-                LanguageImage(Modifier.fillMaxWidth())
+                LanguageTitles(language = language, Modifier.padding(8.dp))
+                LanguageImage(language, Modifier.fillMaxWidth())
                 AnimatedVisibility(
                     visible = expanded,
                     enter = expandVertically(expandFrom = Alignment.Top),
                     exit = shrinkVertically(shrinkTowards = Alignment.Top)
                 ) {
-                    LanguageDescription(Modifier.padding(8.dp))
+                    LanguageDescription(language,Modifier.padding(8.dp))
                 }
             }
         }
@@ -108,38 +128,39 @@ fun CardLanguage(language: Language, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun LanguageTitles(modifier: Modifier = Modifier) {
+fun LanguageTitles(language: Language, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(R.string.js_label),
+            text = stringResource(language.label),
             style = MaterialTheme.typography.labelMedium,
         )
         Text(
-            text = stringResource(R.string.js_title),
+            text = stringResource(language.title),
             style = MaterialTheme.typography.titleMedium,
         )
     }
 }
 
 @Composable
-fun LanguageImage(modifier: Modifier = Modifier) {
+fun LanguageImage(language: Language, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(R.drawable.js),
+            painter = painterResource(language.image),
             modifier = Modifier.size(120.dp),
-            contentDescription = null
+            contentDescription = null,
+            contentScale = ContentScale.Crop
         )
     }
 }
 
 @Composable
-fun LanguageDescription(modifier: Modifier = Modifier) {
+fun LanguageDescription(language: Language, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(
-            text = "JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS.",
+            text = stringResource(language.description),
             textAlign = TextAlign.Justify
         )
     }

@@ -21,7 +21,7 @@ val Typography = Typography(
     headlineSmall = TextStyle(
         fontFamily = Libertnus,
         fontWeight = FontWeight.Normal,
-        fontSize = 28.sp,
+        fontSize = 18.sp,
     ),
     titleMedium = TextStyle(
         fontFamily = Montserrat,

@@ -21,22 +21,22 @@ val Typography = Typography(
     headlineSmall = TextStyle(
         fontFamily = Libertnus,
         fontWeight = FontWeight.Normal,
-        fontSize = 26.sp,
+        fontSize = 28.sp,
     ),
     titleMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp
+        fontSize = 22.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
-        fontSize = 18.sp
+        fontSize = 20.sp
     ),
     labelMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
-        fontSize = 14.sp
+        fontSize = 18.sp
     )
 )
 
